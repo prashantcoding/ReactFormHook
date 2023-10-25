@@ -101,10 +101,8 @@ export const quickSinglesQuestion = [
     
   },
   {
-    
-    question: "Custom",
-    
-  },
+    question:'custom'
+  }
 ]
 
 

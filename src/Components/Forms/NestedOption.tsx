@@ -5,8 +5,8 @@ import './QuickSingle.css'
 interface NestedOptionProps {
     nestIndex: number;
     control: any; // Replace with the appropriate type if needed
-    register: any; // Replace with the appropriate type if needed
-    // Add other prop definitions here as needed
+    register: any;
+
 }
 
 const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, register }) => {
@@ -18,6 +18,8 @@ const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, registe
 
     return (
         <div className="nested-option-container">
+
+            
             {fields.map((field, index) => (
                 <div key={field.id} className="option-row">
                     <input
@@ -25,7 +27,7 @@ const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, registe
                         {...register(`questions.${nestIndex}.options.${index}.option`)}
                         placeholder='Enter Your Option Value'
                     />
-                    <button className="remove-option-button" onClick={() => { remove(index) }}>Remove</button>
+                  { fields.length>2&&  <button className="remove-option-button" onClick={() => { remove(index) }}>Remove</button>}
                 </div>
             ))}
 
