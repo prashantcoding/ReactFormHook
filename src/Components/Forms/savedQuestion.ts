@@ -3,6 +3,7 @@
 export const quickSinglesQuestion = [
   {
     question: "Who will score the most runs in this match?" 
+    
   },
   {
     

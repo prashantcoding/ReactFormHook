@@ -6,17 +6,34 @@ import NestedOption from "./NestedOption";
 import './QuickSingle.css'; // Import the CSS file
 let Render = 0;
 const QuickSingle = () => {
-  
- 
-  console.log( Render++);
+  interface IQuickSingles {
+    id: number
+    question: string
+    options: {
+      id: number
+      option: string,
 
-  const { register, control } = useForm({
+    }[]
+    correctOption?: number
+  }
+
+  type Question = {
+    questions: IQuickSingles[]
+  }
+
+  console.log(Render++);
+
+  const { register, control } = useForm<Question>({
     defaultValues: {
       questions: [{
-        question: 'Select A Question',
+        id: 1,
+        question: '',
         options: [{
           id: 1,
           option: ''
+        },{
+          id:2,
+          option:''
         }]
       }]
     }
@@ -44,8 +61,8 @@ const QuickSingle = () => {
             {
               field.question == 'custom' ? <div>
                 <label htmlFor='customQuestion'><h5>Enter your Custom Question Here:</h5></label>
-                <input placeholder='enter Your question' {...register(`questions.${index}.question`)} className='option-input'></input> 
-              </div>: ''
+                <input placeholder='enter Your question' {...register(`questions.${index}.question`)} className='option-input'></input>
+              </div> : ''
             }
             <NestedOption nestIndex={index} {...{ control, register }} />
 
@@ -61,13 +78,12 @@ const QuickSingle = () => {
         fields.length < 3 && (
           <button className="add-question-button" type="button" onClick={() => {
             append({
+              id: 1,
               question: '',
-              options: [
-                {
-                  id: 1,
-                  option: ''
-                }
-              ]
+              options: [{
+                id: 1,
+                option: ''
+              }]
             })
           }}>Add Question</button>
         )

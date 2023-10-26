@@ -6,10 +6,10 @@ interface NestedOptionProps {
     nestIndex: number;
     control: any; // Replace with the appropriate type if needed
     register: any;
-
+    
 }
 
-const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, register }) => {
+const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, register}) => {
     // You can access and use props.nestIndex, props.control, and props.register here
     const { fields, append, remove } = useFieldArray({
         name: `questions.${nestIndex}.options`,
@@ -24,7 +24,9 @@ const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, registe
                 <div key={field.id} className="option-row">
                     <input
                         className="option-input"
-                        {...register(`questions.${nestIndex}.options.${index}.option`)}
+                        {...register(`questions.${nestIndex}.options.${index}.option`,{
+                            required:'option is required'
+                        })}
                         placeholder='Enter Your Option Value'
                     />
                   { fields.length>2&&  <button className="remove-option-button" onClick={() => { remove(index) }}>Remove</button>}
@@ -32,7 +34,7 @@ const NestedOption: React.FC<NestedOptionProps> = ({ nestIndex, control, registe
             ))}
 
             {fields.length < 4 && (
-                <button className="add-option-button" type="button" onClick={() => { append({ id: fields.length + 1, option: '' }) }}>Add Options</button>
+                <button className="add-option-button" type="button" onClick={() => {  append({ id: fields.length + 1, option: '' }) }}>Add Options</button>
             )}
         </div>
     );
